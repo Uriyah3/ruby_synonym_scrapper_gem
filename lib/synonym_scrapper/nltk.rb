@@ -1,10 +1,13 @@
-class Nltk
 
-	def initialize()
-		
-	end
+module SynonymScrapper
+	class Nltk
 
-	def synonyms(word, options)
-		return "El sinónimo de #{word}, usando nltk es X"
+		def initialize()
+			
+		end
+
+		def synonyms(word, options = {})
+			return "El sinónimo de #{word}, usando nltk es X"
+		end
 	end
 end
