@@ -10,7 +10,14 @@ module SynonymScrapper
   class DictionaryNotAvailable < Error
     def initialize(dictionary = "")
       msg = "The dictionary named #{dictionary.to_s} does not exist in the available dictionaries list"
-      super(msg)
+      super msg
+    end
+  end
+
+  class WordFormatError < Error
+    def initialize(word = "")
+      msg = "The word #{word} is not a string, it must be a string."
+      super msg
     end
   end
 
@@ -25,6 +32,7 @@ module SynonymScrapper
 
     def synonyms(word, dictionary)
       raise DictionaryNotAvailable, dictionary unless synonym_dictionaries.key?(dictionary)
+      raise WordFormatError, word unless word.is_a? String
 
       return synonym_dictionaries[dictionary].synonyms(word)
     end
