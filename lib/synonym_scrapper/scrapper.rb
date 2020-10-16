@@ -28,7 +28,7 @@ module SynonymScrapper
 	  end
 
 	  def build_call_url(endpoint)
-	  	raise "define this method in subclasses"
+	  	raise Error, "This method must be redefined in subclasses"
 	  end
 
 	  def call(endpoint)

@@ -10,6 +10,14 @@ class ScrapperTest < Minitest::Test
     refute_empty SynonymScrapper::Scrapper::USER_AGENTS
   end
 
+  def test_build_call_url_method_raises_error_if_not_overwritten
+    scrapper = SynonymScrapper::Scrapper.new(3, "http://example.api/")
+
+    assert_raises SynonymScrapper::Error do
+      scrapper.build_call_url("endpoint")
+    end
+  end
+
   def test_build_call_url_method_can_be_overwritten
     scrapper = SynonymScrapper::Scrapper.new(3, "http://example.api/")
     def scrapper.build_call_url endpoint
