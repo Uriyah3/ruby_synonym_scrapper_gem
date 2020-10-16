@@ -28,23 +28,26 @@ module SynonymScrapper
 	  end
 
 	  def build_call_url(endpoint)
-	  	"define this method in subclasses"
+	  	raise "define this method in subclasses"
 	  end
 
 	  def call(endpoint)
 	  	uri = build_call_url(endpoint)
-	  	begin
+			begin
 				response = URI.open(uri, 'User-Agent' => USER_AGENTS.sample)
+			rescue OpenURI::HTTPError => e
+				puts e
+				return [] if e.message == '404 Not Found'
+				retry_call endpoint unless @retries_left <= 0 
 			rescue => e
 				puts e
-				retry_call endpoint unless retries_left <= 0 
 			end
-	  	retries_left = max_retries
+	  	@retries_left = @max_retries
 	  	return response
 	  end
 
 	  def retry_call(endpoint)
-	  	retries_left -= 1
+	  	@retries_left -= 1
 
 	  	sleepTime = (50 + rand(950)) / 1000
 	  	sleep(sleepTime)
