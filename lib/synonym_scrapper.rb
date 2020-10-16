@@ -7,6 +7,13 @@ require 'synonym_scrapper/nltk'
 module SynonymScrapper
   class Error < StandardError; end
 
+  class DictionaryNotAvailable < Error
+    def initialize(dictionary = "")
+      msg = "The dictionary named #{dictionary.to_s} does not exist in the available dictionaries list"
+      super(msg)
+    end
+  end
+
   class SynonymScrapper
 
     # Define once all dictionaries that can be used
@@ -17,7 +24,7 @@ module SynonymScrapper
     }
 
     def synonyms(word, dictionary)
-      return "Dictionary does not exist" unless synonym_dictionaries.key?(dictionary)
+      raise DictionaryNotAvailable, dictionary unless synonym_dictionaries.key?(dictionary)
 
       return synonym_dictionaries[dictionary].synonyms(word)
     end
