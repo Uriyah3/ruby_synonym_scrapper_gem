@@ -30,8 +30,8 @@ First you need to have Python3 installed on the machine that will use this gem. 
 And download its data through python (you can run these through the python interpreter):
 
 ```python
-	import nltk
-	nltk.download()
+import nltk
+nltk.download()
 ```
 From the packages available in NLTK you'll need to download omw (Open Multilingual Wordnet).
 
@@ -63,11 +63,11 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## To do
 
-- [] Implement more synonym sources
-- [] Use datamuse's API full capabilities
-- [] Filter data obtained from dictionaries by score
-- [] Add method to get synonyms from all dictionaries
-- [] Extend to more languages
+- [ ] Implement more synonym sources
+- [ ] Use datamuse's API full capabilities
+- [ ] Filter data obtained from dictionaries by score
+- [ ] Add method to get synonyms from all dictionaries
+- [ ] Extend to more languages
 
 ## License
 
