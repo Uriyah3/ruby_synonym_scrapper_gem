@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.requirements << 'Python3 installed along NLTK with omw'
-  spec.metadata["allowed_push_host"] = "https://rubygems.org/gems/synonym_scrapper"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Uriyah3/ruby_synonym_scrapper"
