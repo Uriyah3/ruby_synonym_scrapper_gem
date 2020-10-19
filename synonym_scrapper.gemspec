@@ -6,13 +6,19 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nicolás Mariángel"]
   spec.email         = ["nicolas.mariangel@usach.cl"]
 
-  spec.summary       = %q{Scrapper de sinonimos y antonimos para palabras en español.}
-  spec.description   = %q{Gema que permite consultar por sinonimos y antonimos en español desde los sitios: Educalingo, Datamuse y desde la interfaz nltk de python}
+  spec.summary       = %q{Synonym scrapper for spanish words / Scrapper de sinónimos para palabras en español.}
+  spec.description   = <<-EOF
+    English: Gem that scrapes spanish synonyms from various sources.
+    Currently three sources are supported: Datamuse, Educalingo y NLTK.
+
+    Spanish: Gema que permite consultar por sinonimos en español desde 
+    los sitios: Datamuse, Educalingo y desde la interfaz nltk de python.
+  EOF
   spec.homepage      = "https://rubygems.org/gems/synonym_scrapper"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
-  #s.requirementes << 'Python3 installed to use NLTK'
+  spec.requirements << 'Python3 installed along NLTK with omw'
   spec.metadata["allowed_push_host"] = "https://rubygems.org/gems/synonym_scrapper"
 
   spec.metadata["homepage_uri"] = spec.homepage
