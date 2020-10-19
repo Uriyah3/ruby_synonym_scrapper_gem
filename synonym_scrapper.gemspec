@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.requirements << 'Python3 installed along NLTK with omw'
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/Uriyah3/ruby_synonym_scrapper"
+  spec.metadata["source_code_uri"] = "https://github.com/Uriyah3/ruby_synonym_scrapper_gem"
   #spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
