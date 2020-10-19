@@ -37,14 +37,29 @@ From the packages available in NLTK you'll need to download omw (Open Multilingu
 
 ## Usage
 
-TODO: WRITE USAGE INSTRUCTIONS HERE
+To use this gem you first need to require it:
+
+```ruby
+require 'synonym_scrapper'
+```
+
+Then you need to create a SynonymScrapper instance and request synonyms from it using one of the dictionaries available. Example:
+
+```ruby
+scrapper = SynonymScrapper::SynonymScrapper.new
+
+scrapper.synonyms("entretenimiento", :datamuse)
+scrapper.synonyms("saltar", :educalingo)
+scrapper.synonyms("auto", :nltk)
+```
+
+Data obtained is an array of hashes containing the keys `:word` and `:score`.
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 
 ## To do
 
