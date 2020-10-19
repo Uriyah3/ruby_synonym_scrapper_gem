@@ -1,8 +1,9 @@
 # SynonymScrapper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/synonym_scrapper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Synonym Scrapper is a ruby gem that obtains spanish synoynms from various sources. Currently three synonym sources are supported:
+* Datamuse API ([link](https://www.datamuse.com/api/))
+* Educalingo dictionary ([link](https://educalingo.com/en/dic-es))
+* Natural Language Toolkit ([link](https://www.nltk.org/))
 
 ## Installation
 
@@ -20,9 +21,23 @@ Or install it yourself as:
 
     $ gem install synonym_scrapper
 
+### Using NLTK
+
+First you need to have Python3 installed on the machine that will use this gem. Then you need to install NLTK:
+
+    $ pip3 install nltk
+
+And download its data through python (you can run these through the python interpreter):
+
+```python
+	import nltk
+	nltk.download()
+```
+From the packages available in NLTK you'll need to download omw (Open Multilingual Wordnet).
+
 ## Usage
 
-TODO: Write usage instructions here
+TODO: WRITE USAGE INSTRUCTIONS HERE
 
 ## Development
 
@@ -30,10 +45,14 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/synonym_scrapper.
+## To do
 
+- [] Implement more synonym sources
+- [] Use datamuse's API full capabilities
+- [] Filter data obtained from dictionaries by score
+- [] Add method to get synonyms from all dictionaries
+- [] Extend to more languages
 
 ## License
 

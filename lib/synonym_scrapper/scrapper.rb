@@ -1,7 +1,14 @@
 require 'open-uri'
 
 module SynonymScrapper
+
+	##
+	# Base scrapper used to scrape APIs/websites
+
 	class Scrapper
+
+		##
+		# List of user agents to select from when scraping.
 		USER_AGENTS = [
 	    'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko',
 	    'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0',
@@ -17,21 +24,46 @@ module SynonymScrapper
 	    'Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
 	  ]
 
+		##
+		# Number, denotes the maximum number of retries to do for each failed request.
 	  attr_accessor :max_retries
+
+		##
+		# Number, denotes how many more retries will be done for a request.
 	  attr_accessor :retries_left
+
+		##
+		# Base url of the API/website to be consulted.
 	  attr_accessor :base_url
 
-	  def initialize(max_retries, base_url)
+		##
+		# Initilalize the scrapper with the +base_url+ to scrape and the maximum
+		# number of retries, +max_retries+
+
+	  def initialize max_retries, base_url
 	  	@max_retries = max_retries
 	  	@retries_left = max_retries
 	  	@base_url = base_url
 	  end
 
-	  def build_call_url(endpoint)
+		##
+		# Method to be overwritten by classes that inherit from this one
+		# endpoint can be anything [Array, Hash, String, etc] as long as
+		# it is used consistently in the child class.
+
+	  def build_call_url endpoint
 	  	raise Error, "This method must be redefined in subclasses"
 	  end
 
-	  def call(endpoint)
+		##
+		# Executes a call to the given +endpoint+ and returns its response.
+		#
+		# In case of HTTP Error, method will retry +@max_retries+ times.
+		# In case of a 404 response, then it will be assumed that retrying 
+		# would be useless and an empty array is returned.
+		# No retrying is done for other types of errors.
+
+	  def call endpoint
 	  	uri = build_call_url(endpoint)
 			begin
 				response = URI.open(uri, 'User-Agent' => USER_AGENTS.sample)
@@ -42,11 +74,16 @@ module SynonymScrapper
 			rescue => e
 				puts e
 			end
+			# Reset the retries_left variable on this instance after each request
 	  	@retries_left = @max_retries
 	  	return response
 	  end
 
-	  def retry_call(endpoint)
+		##
+		# Retry the call to the +endpoint+ specified after a waiting between
+		# 50 and 1000 milliseconds (random sleep)
+
+	  def retry_call endpoint
 	  	@retries_left -= 1
 
 	  	sleepTime = (50 + rand(950)) / 1000

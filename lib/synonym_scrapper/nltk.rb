@@ -1,8 +1,17 @@
 require 'json'
 
 module SynonymScrapper
+
+	##
+	# Connector and requester of python's NLTK
+
 	class Nltk
 
+		##
+		# Obtain synonyms of a +word+ from the NLTK.
+		#
+		# Makes a call to a python script and parses its results. 
+		
 		def synonyms(word, options = {})
 
 			begin
@@ -22,5 +31,6 @@ module SynonymScrapper
 				return []
 			end
 		end
+
 	end
 end

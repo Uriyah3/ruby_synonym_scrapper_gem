@@ -2,16 +2,30 @@ require 'nokogiri'
 require 'synonym_scrapper/scrapper'
 
 module SynonymScrapper
+
+	##
+	# Scrapper for Educalingo's website
+	
 	class Educalingo < Scrapper
 
+		##
+		# Initialize the parent Scrapper Class
+		
 		def initialize()
 			super(5, "https://educalingo.com/en/dic-es/")
 		end
 
+		##
+		# Build the url to be called using this class' +base_url+ and a +word+.
+		# Returns an url to where +word+'s synonyms can be obtained.
+		
 		def build_call_url(word)
 			URI.parse(base_url + word)
 		end
 
+		##
+		# Obtain synonyms of a +word+ from Educalingo.
+		
 		def synonyms(word, options = {})
 			response = call(word)
 			doc = Nokogiri.HTML(response)
@@ -29,5 +43,6 @@ module SynonymScrapper
 
 			return synonyms
 		end
+
 	end
 end
