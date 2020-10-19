@@ -27,15 +27,18 @@ class SynonymScrapperTest < Minitest::Test
   	end
   end
 
+  def test_ignores_case_to_check_for_dictionary_key_availability
+    @scrapper::synonym_dictionaries.keys.each do |dictionary|
+
+      assert @scrapper.dictionary_exists?(dictionary.upcase)
+      assert @scrapper.dictionary_exists?(dictionary.downcase)
+      assert @scrapper.dictionary_exists?(dictionary.capitalize)
+    end
+  end
+
   def test_raises_error_for_incorrect_dictionary
   	assert_raises SynonymScrapper::DictionaryNotAvailable do
   		@scrapper.synonyms(@word, :rae)
-  	end
-  end
-
-  def test_raises_error_for_not_capitalized_dictionary
-  	assert_raises SynonymScrapper::DictionaryNotAvailable do
-  		@scrapper.synonyms(@word, :datamuse)
   	end
   end
 

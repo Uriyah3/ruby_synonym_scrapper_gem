@@ -22,24 +22,26 @@ module SynonymScrapper
   end
 
   class SynonymScrapper
-
-    # Define once all dictionaries that can be used
+    
     @@synonym_dictionaries = {
       Datamuse: Datamuse.new,
       Educalingo: Educalingo.new,
       Nltk: Nltk.new
     }
 
-    def synonyms(word, dictionary)
-      raise DictionaryNotAvailable, dictionary unless synonym_dictionaries.key?(dictionary)
-      raise WordFormatError, word unless word.is_a? String
-
-      return synonym_dictionaries[dictionary].synonyms(word)
-    end
-
-    def synonym_dictionaries()
+    def synonym_dictionaries
       @@synonym_dictionaries
     end
 
+    def synonyms word, dictionary
+      raise DictionaryNotAvailable, dictionary unless dictionary_exists?(dictionary)
+      raise WordFormatError, word unless word.is_a? String
+
+      return synonym_dictionaries[dictionary.capitalize].synonyms(word)
+    end
+
+    def dictionary_exists? dictionary
+      synonym_dictionaries.key?(dictionary.capitalize)
+    end
   end
 end
