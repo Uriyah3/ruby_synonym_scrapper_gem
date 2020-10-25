@@ -20,7 +20,7 @@ module SynonymScrapper
 		# Returns an url to where +word+'s synonyms can be obtained.
 		
 		def build_call_url(word)
-			URI.parse(base_url + word)
+			URI.parse(URI.escape(base_url + word))
 		end
 
 		##
